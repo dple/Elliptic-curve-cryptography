@@ -1,0 +1,78 @@
+// This program implement the ECM method for factorization using short Weierstrass elliptic curves
+// y^2 = x^3 + a*x + b;
+// n : factored number 
+
+Add:= function(xP, yP, xQ, yQ, a, n)
+    // return R = P + Q
+    local l, xR, yR;
+
+    if xP eq xQ then
+	if yP eq yQ then
+ 	       l := (3*xP^2 + a);
+	  	if Gcd(2*yP, n) eq 1 then
+		       l := l*Modinv(2*yP, n) mod n;
+		else
+			return Gcd(2*yP, n), 0;
+		end if;
+	else return 0, 0;
+	end if;
+    else // A ne B
+        l:=(yQ - yP);
+	if Gcd((xQ - xP), n) eq 1 then
+		l := l*Modinv((xQ - xP), n) mod n;
+	else return Gcd((xQ - xP), n), 0;
+	end if;	
+    end if;
+    xR := (l^2 - xP - xQ) mod n;
+    yR := (l*(xP - xR) - yP) mod n;
+    return xR, yR;
+end function;
+
+Dbl := function(xP, yP, a, n)
+	// return R = 2P
+	return Add(xP, yP, xP, yP, a, n);
+end function;
+
+scalar := function(xP, yP, k, a, n)
+	// return [k]P
+	local i, l, xR, yR, ki;
+	xR := xP; yR := yP;
+	i := Floor(Log(2,k))-1;
+	while i ge 0 do
+	  xR, yR := Dbl(xR, yR, a, n);
+	  ki:=Intseq(k,2);
+
+    	  if ki[i+1] eq 1 then
+	       xR, yR := Add(xR, yR, xP, yP, a, n);
+    	  end if;
+	  i:=i-1;
+	if yR eq 0 then
+		return xR, yR;
+	end if;
+	end while;
+
+	return xR, yR;
+end function;
+
+ecm := function(xP, yP, k, a, n)
+	// return prime factor of n
+	local xR, yR;
+	xR := xP; yR := yP;
+	for i := 2 to k do
+		xR, yR := scalar(xR, yR, i, a, n);
+		if yR eq 0 then
+			return xR, i;
+	end if;
+	end for;
+	return 0, 0;
+end function;
+
+// Test 
+n := 6887;
+xP := 1512; // 2
+yP := 3166; // 166
+a := 14;    // 1
+b := (yP^2 - xP^3 - a*xP) mod n; // -1
+ecm(xP, yP, 8, a, n);
+//E := EllipticCurve([a, b]);
+
