@@ -1,0 +1,78 @@
+This is Readme file for the program that generates a paring-friendly elliptic curve. It will explain Input, Output of the program and also how the program works.
+
+The program implement three methods to generate a pairing-friendly ellitptic curve: 
+
+1) MNT curves
+2) Brezing and Weng curves
+3) Cocks-Pinch 
+
+Essentially, these methods perform the two following steps:
+
+1. Fix k and compute integers t, r, p such that there exists an elliptic curve E/GF(p) that has the trace of the Frobenius t, a subgroup of points of prime order r, and the embedding degree k. 
+- This step is implemented in Magma.
+
+2. Use the Complex Multiplication (CM) method to find the equation of the curve E/GF(p). 
+- We implemented this step by C language.
+
+(The information about source files is contained in the file "Source.txt").
+
+
+Input: 
+=================
+
+This program provides an interactive input. User will be required to choose:
+
+1. a method to generate a pairing-friendly elliptic curves; 
+2. a size (in bits) of finite field GF(p); 
+3. an embedding degree k.
+
+
+Output:
+=================
+
+1. A base finite field GF(p), and an extension finite field GF(p^k);
+2. An elliptic curve E/GF(p) of Weierstrass form: y^2 = x^3 + Ax + B; 
+3. A generator P of order r.
+
+
+
+How to run:
+=========================
+
+Start Magma, then:
+
+> load "main.m";
+
+
+
+Notes on Input/Output:
+==========================
+
+1. The minimum security level recommended by NIST is 80-bits, thus the size of p should be at least 160 bits.
+
+2. The curve will be outputted on the screen and in a file "curve_output.txt"
+	
+3. For example, with the input is:  
+- The method to generate is Cocks-Pinch.
+- The size of p is 180.
+- The embedding degree: k = 8.
+
+Here is an output file for these parameters:
+
+This program generates a pairing-friendly elliptic curve, which haves: 
+
+- the embedding degree k = 8
+- the order of the finite field p = 21354110230686781349441003191595790939260421028700160845307857 
+- the bits number of p = 204 
+- the order of the largest subgroup of points r:= 321973976242834999086687569 
+- the bits number of r = 89 
+- the Frobenius trace t = 47801228629206045833619282 
+
+The elliptic curve E defined over the finite filed Finite field of size 21354110230686781349441003191595790939260421028700160845307857, is of form: y^2 = x^3 + A*x + B, where: 
+
+the order of elliptic curve E = 21354110230686781349441003191595790891459192399494115011688576
+A = -3
+B = 5772512086050565594687473840782315947777029637040232125181624
+
+The generator of the largest subgroup of points of the elliptic curve E is 
+G = (12116756818251647870423944627034747482116789697389462445372568 : 1562273529243710327643619728384065334196280365221564192059654 : 1) 
