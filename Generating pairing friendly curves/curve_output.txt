@@ -1,0 +1,17 @@
+This program generates a pairing-friendly elliptic curve, which haves: 
+
+- the embedding degree k = 8
+- the order of the finite field p = 21354110230686781349441003191595790939260421028700160845307857 
+- the bits number of p = 204 
+- the order of the largest subgroup of points r:= 321973976242834999086687569 
+- the bits number of r = 89 
+- the Frobenius trace t = 47801228629206045833619282 
+
+ The elliptic curve E defined over the finite filed Finite field of size 21354110230686781349441003191595790939260421028700160845307857, is of form: y^2 = x^3 + A*x + B, where: 
+
+ the order of elliptic curve E = 21354110230686781349441003191595790891459192399494115011688576
+A = -3
+B = 5772512086050565594687473840782315947777029637040232125181624
+
+ The generator of the largest subgroup of points of the elliptic curve E is 
+ G = (12116756818251647870423944627034747482116789697389462445372568 : 1562273529243710327643619728384065334196280365221564192059654 : 1) 

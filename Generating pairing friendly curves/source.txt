@@ -1,0 +1,57 @@
+This file lists the source files of the program. It will also explain how to compile the program on a Linux system. 
+
+
+The distribution media contains the following files:
+
+	Magma source file.
+	main.m 			- The main program.
+	cp.m 			- Cocks-Pinch method implementations
+	bandw.m 		- Brezing-Weng implementations
+	Edwards.m		- Edwards - Weierstrass tranformations
+	eMNT.m			- Extended MNT method implementations
+
+	C++ source file. Most of them are source files from MIRACL library.
+	
+	CM_MODI.CPP     	-    Complex multiplication method implementations
+	MNT_MODI.CPP    	-    Find parameters  for MNT method
+	BIG.H			-    C++ header for 'big' numbers
+	BIG.CPP			-    Big function implementations
+	COMPLEX.H		-	 Complex Float class definition
+	COMPLEX.CPP		-    Complex Float class arithmetic
+	FLOATING.H		-    C++ header for 'float' numbers
+	FLOATING.CPP		-    Float function implementations
+	ZZN.H			-    C++ header for 'big' numbers mod n
+	ZZN.CPP			-    ZZn function implementations
+	ECN.H			-    C++ header for GF(p) Elliptic Curves
+	ECN.CPP			-    ECn function implementations
+	FLPOLY.H		-    Polynomial Class definition, float elements
+	FLPOLY.CPP		-    Polynomial arithmetic with float coefficients
+	MIRACL.H		-    Main MIRACL header
+	MIRACL.LIB		-    Miracl lib containing main tasks of MIRACL library
+	PARAMETERS.H    	-    Header file containing parameters
+	MIRDEF.H		-    Header file for full 32-bit Computer
+	POLY.H			-    Polynomial Class definition, elements from ZZn
+	POLY.CPP		-    Polynomial Arithmetic with ZZn coefficients
+	VARIABLE.H		-    Dummy Variable class
+	GET_PARAMETERS.CPP	-    Get parameters for generating pairing-friendly elliptic curve
+
+	
+	
+How to compile:
+==========================
+
+On UNIX using g++:
+--------------------------------------------
+g++ get_parameters.cpp - o get_para
+g++ -I. -c big.cpp
+g++ -I. -c ecn.cpp
+g++ -I. -c zzn.cpp
+g++ -I. -c poly.cpp
+g++ -I. -c flpoly.cpp
+g++ -I. -c complex.cpp
+g++ -I. -c floating.cpp
+g++ cm_modi.cpp floating.o ecn.o complex.o poly.o flpoly.o big.o zzn.o miracl.a -o cm_modi
+g++ mnt_modi.cpp big.o micracl.a -o mnt_modi
+
+
+After compiling, put executable files (get_para, cm_modi, mnt_modi) in the same folder of magma files.
